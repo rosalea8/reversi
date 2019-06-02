@@ -685,7 +685,7 @@ function create_new_game(){
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ','l','t',' ',' ',' '],
-											[' ',' ',' ','l','t',' ',' ',' '],
+											[' ',' ',' ','t','l',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' ']
@@ -763,5 +763,32 @@ if(games[game_id].player_Targaryen.socket == ''){
 	io.in(game_id).emit('game_update', success_data);
 	/* Check to see if the game is over */
 
+	var row, column;
+	var count = 0;
+	for(row = 0; row < 8; row++){
+		for(column = 0; column < 8; column++){
+			if(games[game_id].board[row][column] != ' '){
+				count++;
+			}
+		}
+	}
 
-}
+	if(count == 64){
+		/* Send a game over message */
+		var success_data = {
+												result:'success',
+												game: games[game_id],
+												who_won: 'everyone',
+												game_id: game_id,
+											};
+		io.in(game_id).emit('game_over', success_data);
+
+		/* Delete old games after 1 hour */
+
+		setTimeout(function(id){
+			return function(){
+				delete games[id];
+				}}(game_id)
+			,60*60*1000);
+		}
+	}
