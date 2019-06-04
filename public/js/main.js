@@ -329,7 +329,7 @@ $('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn</h4>');
   var Targaryensum = 0;
   var Lannistersum = 0;
 
-  var row, column;
+  var row,column;
   for (row = 0; row < 8; row++){
     for(column = 0; column < 8; column++){
       if(board[row][column] == 'T'){
