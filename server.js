@@ -669,15 +669,15 @@ io.sockets.on('connection', function (socket) {
 
 		/*Execute the move*/
 		if(color == 'Lannister'){
-			game.board[row][column] = 'l';
+			game.board[row][column] = 'L';
 			game.whose_turn = 'Targaryen';
-			game.legal_moves = calculate_valid_moves('t', game.board);
+			game.legal_moves = calculate_valid_moves('T', game.board);
 		}
 
 		else if(color == 'Targaryen'){
-			game.board[row][column] = 't';
+			game.board[row][column] = 'T';
 			game.whose_turn = 'Lannister';
-			game.legal_moves = calculate_valid_moves('l', game.board);
+			game.legal_moves = calculate_valid_moves('L', game.board);
 
 		}
 
@@ -712,13 +712,13 @@ function create_new_game(){
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
-											[' ',' ',' ','l','t',' ',' ',' '],
-											[' ',' ',' ','t','l',' ',' ',' '],
+											[' ',' ',' ','L','T',' ',' ',' '],
+											[' ',' ',' ','T','L',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' '],
 											[' ',' ',' ',' ',' ',' ',' ',' ']
 										];
-	new_game.legal_moves = calculate_valid_moves('t', new_game.board);
+	new_game.legal_moves = calculate_valid_moves('T', new_game.board);
 	return new_game;
 }
 
@@ -751,11 +751,11 @@ function check_line_match(who,dr,dc,r,c,board){
 
 function valid_move(who, dr, dc, r, c, board){
 	var other;
-	if(who === 't'){
-		other = 'l';
+	if(who === 'T'){
+		other = 'L';
 	}
-	else if (who === 'l'){
-		other = 't';
+	else if (who === 'L'){
+		other = 'T';
 	}
 	else{
 		log('Houston we have a color problem: '+who);
