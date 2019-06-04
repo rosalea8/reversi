@@ -332,10 +332,10 @@ $('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn</h4>');
   var row, column;
   for (row = 0; row < 8; row++){
     for(column = 0; column < 8; column++){
-      if(board[row][column] == 't'){
+      if(board[row][column] == 'T'){
         Targaryensum++;
       }
-      if(board[row][column] == 'l'){
+      if(board[row][column] == 'L'){
         Lannistersum++;
       }
 
@@ -344,28 +344,28 @@ $('#my_color').append('<h4>It is '+payload.game.whose_turn+'\'s turn</h4>');
         if(old_board[row][column] == '?' && board[row][column] == ' '){
           $('#'+row+'_'+column).html('<img src="assets/images/Empty.gif" alt="empty square"/>');
         }
-        else if(old_board[row][column]== '?' && board[row][column] == 'l'){
+        else if(old_board[row][column]== '?' && board[row][column] == 'L'){
           $('#'+row+'_'+column).html('<img src="assets/images/Empty-to-Lannister.gif" alt="Lannister square"/>');
         }
-        else if(old_board[row][column]== '?' && board[row][column] == 't'){
+        else if(old_board[row][column]== '?' && board[row][column] == 'T'){
           $('#'+row+'_'+column).html('<img src="assets/images/Empty-to-Targaryen.gif" alt="Targaryen square"/>');
         }
-        else if(old_board[row][column]== ' ' && board[row][column] == 'l'){
+        else if(old_board[row][column]== ' ' && board[row][column] == 'L'){
           $('#'+row+'_'+column).html('<img src="assets/images/Empty-to-Lannister.gif" alt="Lannister square"/>');
         }
-        else if(old_board[row][column]== ' ' && board[row][column] == 't'){
+        else if(old_board[row][column]== ' ' && board[row][column] == 'T'){
           $('#'+row+'_'+column).html('<img src="assets/images/Empty-to-Targaryen.gif" alt="Targaryen square"/>');
         }
-        else if(old_board[row][column]== 'l' && board[row][column] == ' '){
+        else if(old_board[row][column]== 'L' && board[row][column] == ' '){
           $('#'+row+'_'+column).html('<img src="assets/images/Lannister-to-Empty.gif" alt="Empty square"/>');
         }
-        else if(old_board[row][column]== 't' && board[row][column] == ' '){
+        else if(old_board[row][column]== 'T' && board[row][column] == ' '){
           $('#'+row+'_'+column).html('<img src="assets/images/Targaryen-to-Empty.gif" alt="Empty square"/>');
         }
-        else if(old_board[row][column]== 'l' && board[row][column] == 't'){
+        else if(old_board[row][column]== 'L' && board[row][column] == 'T'){
           $('#'+row+'_'+column).html('<img src="assets/images/Lannister-to-Targaryen.gif" alt="Targaryen square"/>');
         }
-        else if(old_board[row][column]== 't' && board[row][column] == 'l'){
+        else if(old_board[row][column]== 'T' && board[row][column] == 'L'){
           $('#'+row+'_'+column).html('<img src="assets/images/Targaryen-to-Lannister.gif" alt="Targaryen square"/>');
         }
         else{
