@@ -937,20 +937,35 @@ if(games[game_id].player_Targaryen.socket == ''){
 
 	var row, column;
 	var count = 0;
+	var Targaryen = 0;
+	var Lannister = 0;
 	for(row = 0; row < 8; row++){
 		for(column = 0; column < 8; column++){
-			if(games[game_id].board[row][column] != ' '){
+			if(games[game_id].legal_moves[row][column] != ' '){
 				count++;
+			}
+			if(games[game_id].board[row][column] === 'T'){
+				Targaryen++;
+			}
+			if(games[game_id].board[row][column] === 'L'){
+				Lannister++;
 			}
 		}
 	}
 
-	if(count == 64){
+	if(count == 0){
 		/* Send a game over message */
+		var winner = 'tie game';
+		if (Targaryen > Lannister){
+			winner = 'Targaryen';
+		}
+		if (Lannister > Targaryen){
+			winner = 'Lannister';
+		}
 		var success_data = {
 												result:'success',
 												game: games[game_id],
-												who_won: 'everyone',
+												who_won: winner,
 												game_id: game_id,
 											};
 		io.in(game_id).emit('game_over', success_data);
