@@ -670,12 +670,14 @@ io.sockets.on('connection', function (socket) {
 		/*Execute the move*/
 		if(color == 'Lannister'){
 			game.board[row][column] = 'L';
+			flip_board('L', row, column, game.board);
 			game.whose_turn = 'Targaryen';
 			game.legal_moves = calculate_valid_moves('T', game.board);
 		}
 
 		else if(color == 'Targaryen'){
 			game.board[row][column] = 'T';
+			flip_board('T', row, column, game.board);
 			game.whose_turn = 'Lannister';
 			game.legal_moves = calculate_valid_moves('L', game.board);
 
@@ -818,6 +820,49 @@ function calculate_valid_moves(who, board){
 		}
 	}
 	return valid;
+}
+
+function flip_line(who, dr, dc, r, c, board){
+	if ( (r+dr < 0) || (r+dr > 7) ){
+		return false;
+	}
+
+	if ( (c+dc < 0) || (c+dc > 7) ){
+		return false;
+	}
+
+	if(board[r+dr][c+dc] === ' '){
+		return false;
+	}
+
+	if(board[r+dr][c+dc] === who){
+		return true;
+	}
+
+	else{
+		if(flip_line(who,dr,dc,r+dr,c+dc,board)){
+			board[r+dr][c+dc] = who;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+}
+
+function flip_board(who,row,column,board){
+	flip_line(who,-1,-1, row, column, board);
+	flip_line(who,-1,0,row, column, board);
+	flip_line(who,-1,1,row, column, board);
+
+	flip_line(who,0,-1,row, column, board);
+	flip_line(who,0,1,row, column, board);
+
+	flip_line(who,1,-1,row, column, board);
+	flip_line(who,1,0,row, column, board);
+	flip_line(who,1,1,row, column, board);
+
 }
 
 function send_game_update(socket, game_id, message){
